@@ -6,9 +6,79 @@
 <body>
     <h1>Contact Form With JavaScript Validation</h1>
     <h2>Contact Form</h2>
-    <div class="error_msg">Error Message</div>
-    <form>
-        <input type="name" placeholder="First">
+    <div id="error_message"></div>
+    <form id="myform" onsubmit="return validation()">
+        <div class="input_field">
+            <input type="text" id="firstname" placeholder="Enter First Name">
+        </div>
+        <div class="input_field">
+            <input type="text" id="lastname" placeholder="Enter Last Name">
+        </div>
+        <div class="input_field">
+            <input type="text" id="subject" placeholder="Enter Subject">
+        </div>
+        <div class="input_field">
+            <input type="text" id="mobile" placeholder="Enter Mobile Number">
+        </div>
+        <div class="input_field">
+            <input type="text" id="email" placeholder="Enter Email">
+        </div>
+        <div class="input_field">
+            <textarea id="message" placeholder="Message"></textarea>
+        </div>
+        <div class="input_btn">
+            <input type="submit">
+        </div>
     </form>
 </body>
 </html>
+<script>
+function validation(){
+
+    var firstname=document.getElementById("firstname").value;    
+    var lastname=document.getElementById("lastname").value;    
+    var subject=document.getElementById("subject").value;
+    var mobile=document.getElementById("mobile").value;
+    var email=document.getElementById("email").value;
+    var message=document.getElementById("message").value;
+    var error_message=document.getElementById("error_message");
+    
+    error_message.style.padding="10px";
+    var regex=/^(\+|\d)[0-9]{7,16}$/;
+
+    if (firstname.length<5){
+        text="Please Enter Valid First Name";
+        alert(text)
+        error_message.innerHTML = text;
+        alert(error_message)
+        return false;
+    }
+    if (lastname.length<1){
+        text="Please Enter Valid Last Name";
+        error_message.innerHTML=text;
+        return false;
+    }
+    if (subject.length<10){
+        text="Please Enter Correct Subject";
+        error_message.innerHTML=text;
+        return false;
+    }
+    if(isNaN(mobile) || mobile.length!=10){
+        text="Please Enter Valid Mobile Number";
+        error_message.innerHTML=text;
+        return false;
+    }
+    if(email.indexOf("@") == -1 || email.length<6 ){
+        text="Please Enter Valid Email";
+        error_message.innerHTML=text;
+        return false;
+    }
+    if (subject.length<=10){
+        text="Please Enter Correct Message";
+        error_message.innerHTML=text;
+        return false;
+    }
+    alert('Form Submitted Successfully')
+    return true;
+}
+</script>
